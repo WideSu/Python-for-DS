@@ -9,6 +9,7 @@ music_pd_bkp = music_pd.copy(deep=True)
 # music_pd.head()
 music_pd.info()
 ```
+```
 <class 'pandas.core.frame.DataFrame'>
 RangeIndex: 1556 entries, 0 to 1555
 Data columns (total 23 columns):
@@ -39,6 +40,14 @@ Data columns (total 23 columns):
  22  Chord                      1556 non-null   object
 dtypes: int64(3), object(20)
 memory usage: 279.7+ KB
+```
 Second, change the types according to our needs.
+```Python
+# To covert data in columns into a different type, we can use pandas' to_numeric function, in case that the data is unclear
+# p = re.compile(r'\d+')
+# music_df['Artist Followers'].apply(lambda x: int(x) if p.match(x) else None)
+music_df['Artist Followers'] = pd.to_numeric(music_df['Artist Followers'],errors = 'coerce')# if there's " ", just return NA
+
+```
 
 For int64, we have ""
