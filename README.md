@@ -51,6 +51,7 @@ dtypes: int64(3), object(20)
 memory usage: 279.7+ KB
 ```
 Second, change the types according to our needs.
+Remember do not use apply on large dataset, it's super slow.
 ```Python
 # To covert data in columns into a different type, we can use pandas' to_numeric function, in case that the data is unclear
 # p = re.compile(r'\d+')
