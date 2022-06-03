@@ -61,3 +61,46 @@ music_df['Artist Followers'] = pd.to_numeric(music_df['Artist Followers'],errors
 ```
 
 For int64, we have "Artist Followers, Popularity"
+
+# Interview Questions
+```Python
+def batonPass(friends, time):
+    # Write your code here
+    # decide direction
+    # Method1: Use a list(memory)
+    loops = math.ceil(time/friends) + 1
+    sequence = [i for i in range(1, friends+1)]
+    global_sequence = sequence[:]
+    for i in range(loops-1):
+        sequence.reverse()
+        global_sequence.extend(sequence[1:])
+    # print(global_sequence)
+    return [global_sequence[time-1],global_sequence[time]]
+    # Method2: 
+    loop_num = time // friends
+    
+    remain_steps = time % (friends - 1)
+    if remain_steps == 0:
+        if loop_num % 2 == 0:
+            return [friends-1, friends]
+        else:
+            return [2,1]
+    else:
+        if loop_num % 2 == 0:
+            direction = 1
+            return [remain_steps, remain_steps+1]
+        else:
+            return [friends-remain_steps+1, friends-remain_steps]
+
+
+test_df = pd.DataFrame({'friends':[5,3,3,5,6,6,6,2,2,4,5,5],
+           'time':[6,6,4,3,1,6,7,1,2,6,8,12],
+           'answer':[(4,3),(2,3),(2,1),(3,4),(1,2),(6,5),(5,4),(1,2),(2,1),(2,1),(2,1),(4,5)]
+           })
+for i, test_case in test_df.iterrows():
+    friends, time = test_case['friends'], test_case['time']
+    result = batonPass(friends, time)
+    print('Test case{}, {}'.format(i, tuple(result)==test_case['answer']))
+
+result = batonPass(friends, time)
+```
